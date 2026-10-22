@@ -1,74 +1,73 @@
-# Backlog inicial propuesto
+# Backlog inicial
 
-Este documento es un resumen para orientar el refinamiento. GitHub Issues y GitHub Projects serán el registro del trabajo activo una vez configurados. Los elementos que aparecen aquí no están completados ni crean automáticamente issues.
+Este documento resume la dirección del backlog. El trabajo activo se registra en GitHub Issues y debe organizarse en GitHub Projects cuando el tablero esté disponible. Las propuestas documentales no se consideran terminadas hasta contar con evidencia.
 
-## Épicas candidatas
+## Épicas creadas en GitHub
 
-### Épica E1 — Fundamentos del producto y gestión de entornos
-**Objetivo:** establecer la base, registrar entornos y conocer la conectividad al sistema administrado.
+- [E1 — Fundamentos del producto y gestión de entornos](https://github.com/AlejoAvila/control-center/issues/1)
+- [E2 — Inventario y salud de servicios](https://github.com/AlejoAvila/control-center/issues/2)
+- [E3 — Diagnóstico operativo](https://github.com/AlejoAvila/control-center/issues/3)
+- [E4 — Operaciones controladas](https://github.com/AlejoAvila/control-center/issues/4)
+- [E5 — Backups y recuperación](https://github.com/AlejoAvila/control-center/issues/5)
+- [E6 — Seguridad, identidad y auditoría](https://github.com/AlejoAvila/control-center/issues/6)
+- [E7 — Actualizaciones controladas y extensibilidad](https://github.com/AlejoAvila/control-center/issues/7)
 
-Historias candidatas:
-- Como administrador, quiero registrar un entorno con nombre y tipo, para identificar qué plataforma estoy administrando.
-- Como administrador, quiero seleccionar el entorno activo y verlo siempre en pantalla, para evitar operar accidentalmente sobre el entorno incorrecto.
-- Como operador, quiero saber si el Control Center puede conectarse al entorno, para diferenciar una caída de servicio de una falla de comunicación.
+Las épicas están abiertas y no implican que el alcance esté cerrado ni que la implementación haya comenzado.
 
-### Épica E2 — Inventario y salud de servicios
-**Objetivo:** obtener una vista fiable del estado de cada servicio soportado.
+## Investigación inicial creada en GitHub
 
-Historias candidatas:
-- Como operador, quiero ver el inventario de servicios del entorno, para saber qué componentes están presentes.
-- Como operador, quiero distinguir runtime, salud funcional y última comprobación, para detectar servicios degradados y datos obsoletos.
-- Como operador, quiero consultar el detalle y dependencias relevantes de un servicio, para comprender su situación.
+- [#8 — Validar el entorno inicial y las interfaces de administración disponibles](https://github.com/AlejoAvila/control-center/issues/8) — vinculada a E1.
+- [#9 — Definir semántica de estado, salud y dato obsoleto](https://github.com/AlejoAvila/control-center/issues/9) — vinculada a E2.
+- [#10 — Identificar fuentes de logs y métricas para el primer entorno](https://github.com/AlejoAvila/control-center/issues/10) — vinculada a E3.
+- [#11 — Definir el contrato de integración para backup y restauración de Alfresco](https://github.com/AlejoAvila/control-center/issues/11) — vinculada a E5.
+- [#12 — Preparar el backlog refinado y el primer sprint](https://github.com/AlejoAvila/control-center/issues/12) — trabajo de refinamiento.
 
-### Épica E3 — Diagnóstico operativo
-**Objetivo:** facilitar la investigación de problemas con información del entorno y sus servicios.
+## Desglose funcional candidato
 
-Historias candidatas:
-- Como operador, quiero consultar logs de un servicio y acotar el rango temporal cuando la fuente lo soporte, para investigar un incidente.
-- Como operador, quiero consultar eventos e historial, para entender qué cambió antes de una falla.
-- Como operador, quiero ver métricas con su fuente y rango temporal, para interpretar la situación correctamente.
+### E1 — Fundamentos y entornos
+- Registrar un entorno mediante configuración explícita.
+- Mostrar el entorno activo de forma inequívoca.
+- Detectar conectividad y diferenciar desconexión de caída de un servicio.
 
-### Épica E4 — Operaciones controladas
-**Objetivo:** permitir acciones explícitas, autorizadas y trazables.
+### E2 — Inventario y salud
+- Mostrar los servicios presentes en el entorno.
+- Diferenciar estado de runtime, salud funcional y última comprobación.
+- Consultar detalles y dependencias conocidas.
 
-Historias candidatas:
-- Como administrador autorizado, quiero reiniciar un servicio que lo permita, para recuperar una instancia con problemas.
-- Como administrador, quiero ver el impacto y confirmar una operación disruptiva, para evitar errores operativos.
-- Como responsable, quiero consultar el resultado y auditoría de una operación, para comprobar qué ocurrió.
+### E3 — Diagnóstico operativo
+- Consultar logs y aplicar filtros soportados.
+- Consultar eventos e historial.
+- Mostrar métricas solo cuando exista una fuente validada.
 
-### Épica E5 — Backups y recuperación
-**Objetivo:** coordinar respaldos compatibles y evidenciar que son verificables y recuperables.
+### E4 — Operaciones controladas
+- Reiniciar, iniciar o detener servicios únicamente cuando la integración lo permita.
+- Mostrar impacto y requerir confirmación apropiada.
+- Registrar el resultado y verificar la salud posterior.
 
-Historias candidatas:
-- Como operador, quiero iniciar un backup mediante un procedimiento validado, para proteger los datos del entorno.
-- Como operador, quiero seguir el estado y resultado del backup, para detectar fallas.
-- Como responsable, quiero comprobar la integridad del backup y registrar una restauración de prueba, para disponer de evidencia de recuperación.
+### E5 — Backups y recuperación
+- Invocar un procedimiento de backup validado.
+- Seguir progreso, resultado y errores.
+- Verificar integridad y registrar restauración de prueba.
 
-### Épica E6 — Seguridad, identidad y auditoría
-**Objetivo:** limitar y registrar el acceso a los entornos y operaciones.
+### E6 — Seguridad, identidad y auditoría
+- Definir permisos de lectura y operación.
+- Gestionar credenciales de manera segura.
+- Auditar acciones de impacto sin registrar secretos.
 
-Historias candidatas:
-- Como administrador, quiero asignar permisos diferenciados de lectura y operación, para aplicar mínimo privilegio.
-- Como responsable de seguridad, quiero que las acciones de impacto queden auditadas sin registrar secretos, para disponer de trazabilidad.
+### E7 — Actualizaciones y extensibilidad
+- Mostrar versiones cuando exista una fuente fiable.
+- Actualizar de forma controlada con prevalidación y recuperación.
+- Incorporar nuevos adaptadores con pruebas explícitas.
 
-### Épica E7 — Actualizaciones controladas y extensibilidad
-**Objetivo:** preparar cambios versionados y añadir componentes mediante integraciones verificadas.
+## Primer sprint: recomendación provisional
 
-Historias candidatas:
-- Como administrador, quiero conocer la versión desplegada y la candidata a actualización cuando la fuente sea fiable, para planificar cambios.
-- Como responsable técnico, quiero incorporar adaptadores comprobables, para ampliar el soporte sin acoplar la UI a cada runtime.
+No comprometer todavía todas las historias anteriores. Primero completar la investigación de #8 y #9, resolver las dependencias técnicas mínimas y acordar el entorno de prueba. El objetivo candidato del primer sprint es demostrar lectura reproducible del inventario y del estado, con marcas temporales y manejo explícito de desconexión.
 
-## Recomendación para el primer sprint
+El sprint, sus historias, duración y fechas deberán acordarse al refinar el backlog. No se deben inventar fechas ni marcar tareas como completadas por el simple hecho de estar documentadas.
 
-No comprometer todavía todas las historias anteriores. Tras revisar la arquitectura, delimitar el primer entorno y decidir el mecanismo de integración, seleccionar un sprint pequeño que entregue una prueba reproducible de lectura del inventario y del estado de servicios, con timestamp y manejo explícito de desconexión.
+## Pendientes de gestión
 
-El sprint debe priorizar el objetivo y los criterios de aceptación, no la cantidad de issues. Su duración, estimación y fechas se deben acordar al planificar.
-
-## Pendientes de refinamiento
-
-- Seleccionar primer runtime y entorno de prueba.
-- Confirmar fuentes de health checks, inventario y logs.
-- Definir si se requiere agente remoto.
-- Definir identidad y permisos iniciales.
-- Confirmar estrategia de datos y configuración.
-- Crear issues reales y vincularlos a un GitHub Project una vez inspeccionados los recursos existentes.
+- Configurar y verificar un GitHub Project para el seguimiento por estado, prioridad, épica e iteración. La documentación del repositorio no demuestra que exista un tablero.
+- Revisar etiquetas y campos disponibles, reutilizando los existentes cuando sea posible.
+- Refinar historias y criterios de aceptación en Issues después de los resultados de los spikes.
+- Sincronizar de forma segura el repositorio remoto con la carpeta local de Windows tras inspeccionar su contenido. No sobrescribir archivos locales ni forzar el historial remoto.
