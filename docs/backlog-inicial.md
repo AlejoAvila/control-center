@@ -2,7 +2,7 @@
 
 Este documento resume la dirección del backlog. El trabajo activo se registra en GitHub Issues y debe organizarse en GitHub Projects cuando el tablero esté disponible. Las propuestas documentales no se consideran terminadas hasta contar con evidencia.
 
-La investigación de las Issues #8–#11 está resumida en [Investigación técnica inicial](investigacion-tecnica-inicial.md). El informe distingue la última evidencia documental ECM del 11 de octubre de la comprobación en vivo de solo lectura del 22 de octubre. Las Issues permanecen abiertas para revisión del propietario.
+La investigación de las Issues #8–#11 y la propuesta revisada para #12 están en [Investigación técnica inicial](investigacion-tecnica-inicial.md). El informe conserva la evidencia histórica de `acs-local` y la distingue de la documentación y comprobación de solo lectura del laboratorio vigente `acs-independent` (24 de octubre). Las Issues permanecen abiertas para revisión del propietario.
 
 ## Épicas creadas en GitHub
 
@@ -63,18 +63,18 @@ Las épicas están abiertas y no implican que el alcance esté cerrado ni que la
 
 ## Primer sprint semanal: propuesta para revisión
 
-**Objetivo:** demostrar una consulta reproducible de solo lectura por namespace que presenta conectividad de administración, runtime/Pod, readiness de ACS Repository y logs recientes por servicio con permisos mínimos.
+**Objetivo:** demostrar diagnóstico de solo lectura del stack ACS en `kind-acs-independent`, resolviendo componentes distribuidos entre releases Helm y ECK hacia sus workloads, Pods y contenedores; presentar estados separados y consultar logs recientes por servicio.
 
 Trabajo candidato:
 
-- **#8:** definir y probar un cliente Kubernetes de lectura con Role acotado a `alfresco` para Pods, Services, EndpointSlices y workloads.
-- **#9:** incorporar al contrato del adaptador la distinción entre conectividad, runtime/Pod, probe del Repository y antigüedad del dato.
-- **#10:** demostrar consulta reciente de logs por servicio seleccionado, con origen, timestamps y límites de volumen/tiempo.
-- **#11:** refinar y dejar listo el contrato de trabajos de backup; no automatizar backup ni ejecutar restauración en este sprint.
+- **#8:** proponer una PoC de catálogo Kubernetes explícita para Repository, Search, PostgreSQL, ActiveMQ, Share, transformadores, Elasticsearch/ECK y Traefik; resolver cada servicio mediante namespace, release/controlador, Service/selectores y contenedores.
+- **#9:** separar conectividad, runtime, probes, endpoints, estado Elasticsearch, TLS/autenticación y frescura; no resumirlos en un semáforo global.
+- **#10:** consultar logs acotados del servicio/contenedor seleccionado con timestamp, procedencia y límites temporales/de volumen; no agregar todos los servicios automáticamente.
+- **#11:** queda fuera del sprint; primero se necesita un runbook ECM de backup/restore para `acs-independent` y una prueba integral aislada.
 
-La demo debe mostrar inventario, estado, respuesta de probe y logs recientes de un servicio bajo identidad acotada. La investigación en vivo del 22 de octubre confirmó el clúster, once pods ECM Ready y `readyProbe: Success - Tested`; no encontró Metrics API. Métricas quedan fuera. No incluye UI ni operaciones privilegiadas; la creación del Role de prueba requiere planificar el cambio dentro del sprint. Los criterios detallados, dependencias y limitaciones están en [Investigación técnica inicial](investigacion-tecnica-inicial.md).
+La demo debe validar el contexto `kind-acs-independent`, mostrar el catálogo multiservicio, señales de salud separadas y logs recientes por servicio bajo identidad Kubernetes restringida. El 24 de octubre se comprobó el nodo Ready, cuatro releases Helm deployed, ECK Elasticsearch Ready/yellow de un nodo, Repository 2/2 y otros pods 1/1 Ready, PVC Bound y probes Repository `Success - Tested` en lecturas repetidas. No hay Metrics API. El evento de pull-secret para Search requiere seguimiento. No incluye UI, acceso a Secrets ni escrituras. Se necesitan permisos de lectura en `acs-secure`, `elastic-system` y `traefik`; no aplicar Roles al laboratorio sin decisión separada. Los criterios y límites están en [Investigación técnica inicial](investigacion-tecnica-inicial.md).
 
-La duración propuesta es una semana sin fechas de calendario. Confirmar capacidad y criterios finales al planificar; no marcar trabajo como terminado por estar documentado.
+La duración propuesta sigue siendo una semana, pero el alcance anterior de single-release/namespace debe ampliarse por la separación entre releases y ECK. Confirmar capacidad e identidad de lectura antes de asignar; no hay fecha ni Iteration. No marcar trabajo como terminado por estar documentado.
 
 ## Estado verificado de GitHub Projects
 
